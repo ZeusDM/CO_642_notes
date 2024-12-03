@@ -1,0 +1,106 @@
+\documentclass{scrbook}
+\KOMAoptions{
+	DIV=12,
+	fontsize=12pt,
+	paper=letter,
+	twoside=false,
+	parskip=half-,
+}
+\usepackage[onehalfspacing, nodisplayskipstretch]{setspace}
+\usepackage{amsmath, amssymb, amsfonts, mathtools}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\textbf{(\roman*)}, itemsep=0pt, topsep=0pt, ref={(\roman*)}}
+
+\usepackage[T1]{fontenc}
+\usepackage{mlmodern}  
+\makeatletter
+\input{t1mlmr.fd}
+\makeatother
+\DeclareFontShape{T1}{mlmr}{m}{scit}{<->ssub*mlmr/m/scsl}{}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=purple!70!black,
+    citecolor=green!70!black,
+    filecolor=orange!90!black,
+    urlcolor=teal!80!black
+}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows, graphs, graphdrawing, graphs.standard}
+\tikzgraphsset{edges={draw,semithick}, nodes={circle,draw,semithick}}
+\usegdlibrary{force, layered, trees}
+
+\usepackage{graphicx}
+\newcommand{\cev}[1]{\reflectbox{\ensuremath{\vec{\reflectbox{\ensuremath{#1}}}}}}
+
+\usepackage{subcaption}
+
+\usepackage[american]{babel}
+\usepackage[en-US]{datetime2}
+\DTMlangsetup[en-US]{showdayofmonth=false}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\vocab}[1]{\textbf{#1}}
+\newcommand\symdiff{\mathbin{\triangle}}
+
+\DeclareMathOperator{\ex}{ex}
+
+\usepackage[american]{babel}
+\usepackage{csquotes}
+
+% https://tex.stackexchange.com/questions/343136/inline-spacing-within-the-cases-command-when-document-is-in-doublespace-mode
+\makeatletter
+\newcommand\new@setfontsize[3]{%
+    \ifx \protect \@typeset@protect \let \@currsize #1\fi \fontsize {#2}{#3}\selectfont
+}
+\let\orig@setfontsize\@setfontsize
+\let\orig@cases\cases
+\let\endorig@cases\endcases
+
+\renewenvironment{cases}{%
+    \let\@setfontsize\new@setfontsize
+    \setstretch{\setspace@singlespace}%
+    \let\setfontsize\orig@setfontsize
+    \orig@cases
+}{%
+    \endorig@cases
+}
+\makeatother
+
+\usepackage[style=alphabetic, backend=biber,isbn=false,url=false]{biblatex} 
+\addbibresource{references.bib}
+
+\title{Notes for Graph Theory}
+\author{Guilherme Zeus Dantas e Moura}
+
+\begin{document}
+	\maketitle
+
+    This document contains my lecture notes for CO 642, Graph Theory, taught by Penny Haxell at the University of Waterloo in the Fall 2024 term.
+    Any errors, inaccuracies, or misinterpretations are entirely my own.
+    Use these notes at your own discretion, and please feel free to point out any corrections that may be needed.
+    
+    Topics not covered in these notes (and in the course) include \emph{Regularity Method}, and \emph{Minors}.
+    
+    \tableofcontents
+
+    \input{chapters/01_flows.tex}
+    \input{chapters/02_coloring.tex}
+    \input{chapters/03_ramsey.tex}
+
+    \printbibliography
+\end{document}
