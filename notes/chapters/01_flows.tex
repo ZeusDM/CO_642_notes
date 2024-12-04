@@ -1,5 +1,7 @@
 \chapter{Flows}
 
+\section{Circulations and Flows}
+
 A \vocab{multigraph} is a triple \(G = (V, E, r)\),
 where \(V\) and \(E\) are sets, and
 \begin{equation}
@@ -253,6 +255,8 @@ Note that \(f\) can take any value on loops.
 	and \(f(e, x, y) = 2\) if \(x \in W\) and \(y \in U\).
 	Then, \(f\) is a \(\mathbb{Z}_3\) flow on \(G\).
 \end{proof}
+
+\section{Flow Polynomials}
 
 \begin{theorem}[\cite{Tutte1954}] \label{thm:flow_polynomial}
 	Let \(G\) be a multigraph.
@@ -705,6 +709,8 @@ We can also use Corollary~\ref{cor:flow_cut_edge} to claim that the flow polynom
 
 As exemplified, the algorithm induced by the proof of Tutte's theorem takes exponential time.
 There's a line of research in studying properties and algorithms for flow polynomials.
+
+\section{Flow Number and Existence of Flows}
 
 \begin{definition}[Flow number]
 	A \(\mathbb{Z}\)-flow on a multigraph \(G\) is a \vocab{\(k\)-flow} if \(|f(\vec{e})| \leq k\) for all \(\vec{e} \in \vec{E}\).
