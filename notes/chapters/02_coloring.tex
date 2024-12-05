@@ -8,11 +8,19 @@
     such that \(c(u) \neq c(v)\) for every edge \(uv \in E(G)\).
 \end{definition}
 
+Proper coloring is a \emph{foundational problem in graph labeling}, wherein we study functions on \(V(G)\) according to constraints imposed on the graph (e.g.\ non-adjacent vertices must have different labels).
+
 Note that a coloring of \(G\) is the same as a partition of \(V(G)\) into independent sets; that is, the induced subgraph on the vertices of each color is an independent set.
+Proper coloring is also a \emph{foundational problem in graph decomposition}, wherein we seek to decompose \(V(G)\) into certain kinds of subgraphs (e.g.\ independent sets).
 
 \begin{definition}[Chromatic Number]
     The \vocab{chromatic number} of a graph \(G\), denoted \(\chi(G)\), is the smallest \(k\) such that \(G\) has a \(k\)-coloring.
 \end{definition}
+
+\begin{proposition}
+    Let \(G\) be a graph.
+    Then, \(G\) is \(2\)-colorable if and only if \(G\) does not contain an odd cycle.
+\end{proposition}
 
 \begin{proposition}
     For a planar graph \(G\),
@@ -38,7 +46,12 @@ For any graph \(G\) and for any order \(v_1, v_2, \ldots, v_n\) of \(V(G)\), we 
 This coloring uses at most \(\Delta(G) + 1\) colors,
 where \(\Delta(G)\) is the maximum degree of \(G\).
 
-Let \(\delta(G)\) be the minimum degree of \(G\).
+\begin{proposition} \label{prop:greedy-coloring-delta-plus-one}
+    Let \(G\) be a graph.
+    Then \(\chi(G) \leq \Delta(G) + 1\).
+\end{proposition}
+
+We can refine this bound by choosing the order of the vertices carefully.
 
 \begin{lemma} \label{lem:greedy-coloring-any-order}
     Let \(G\) be a graph and let \(v_1, v_2, \ldots, v_n\) be an order of \(V(G)\).
@@ -62,7 +75,8 @@ Let \(\delta(G)\) be the minimum degree of \(G\).
     \begin{equation}
         k = \max_{H \subseteq G} \delta(H),
     \end{equation}
-    where the maximum is taken over all induced subgraphs \(H\) of \(G\).
+    where the maximum is taken over all induced subgraphs \(H\) of \(G\),
+    and \(\delta(H)\) denotes the minimum degree of \(H\).
     Then \(\chi(G) \leq k + 1\).
 \end{theorem}
 
@@ -75,20 +89,20 @@ Let \(\delta(G)\) be the minimum degree of \(G\).
     the greedy coloring of \(G\) with respect to the order \(x_1, x_2, \ldots, x_n\) uses at most \(k + 1\) colors.
 \end{proof}
 
-\begin{corollary} \label{cor:greedy-coloring-delta-plus-one}
-    Let \(G\) be a graph.
-    Then \(\chi(G) \leq \Delta(G) + 1\).
-\end{corollary}
-
 Recall that a graph that is connected but not \(2\)-connected has a block decomposition: a tree-like structure consisting of maximal connected subgraphs without a cut vertex, that intersect only at cut vertices.
 
-\begin{proposition}
+In Propositions~\ref{prop:greedy-coloring-tight-complete} and~\ref{prop:greedy-coloring-tight-odd-cycle},
+we see that the bound in Proposition~\ref{prop:greedy-coloring-delta-plus-one} is tight for complete graphs and odd cycles.
+
+\begin{proposition} \label{prop:greedy-coloring-tight-complete}
     If \(G = K_n\), then \(\chi(G) = n = \Delta(G) + 1\).
 \end{proposition}
 
-\begin{proposition}
+\begin{proposition} \label{prop:greedy-coloring-tight-odd-cycle}
     If \(G = C_{2n + 1}\), then \(\chi(G) = 3 = \Delta(G) + 1\).
 \end{proposition}
+
+However, these are the only (connected) cases where the bound is tight, and \nameref{thm:brooks-theorem} \cite{Brooks1941} improves the bound in Proposition~\ref{prop:greedy-coloring-delta-plus-one} for all other connected graphs.
 
 \begin{theorem}[Brooks' Theorem] \label{thm:brooks-theorem}
     Let \(G\) be a connected graph that is not a complete graph or an odd cycle.
@@ -96,9 +110,10 @@ Recall that a graph that is connected but not \(2\)-connected has a block decomp
 \end{theorem}
 
 \begin{proof}
-    Assume, by induction, that the theorem holds for all graphs with fewer vertices than \(G\).
-
-    We solve \(\Delta(G) \leq 2\) separately.
+    If \(\Delta(G) \leq 1\), then the result is vacously true.
+    If \(\Delta(G) \leq 2\), then \(G\) is a path or an even cycle, and \(\chi(G) \leq 2 = \Delta(G)\).
+    Assume that \(\Delta(G) \geq 3\).
+    Assume, by induction, that the theorem holds for all connected graphs with fewer vertices than \(G\).
 
     Suppose that \(G\) has a vertex \(x_n\) of degree less than \(\Delta(G)\).
     If \(H\) is an induced graph of \(G\) that contains \(x_n\),
@@ -115,7 +130,7 @@ Recall that a graph that is connected but not \(2\)-connected has a block decomp
 
     We claim that \(G\) contains vertices \(x_1, x_2, x_n\) such that \(x_1x_2 \notin E(G)\), \(x_1x_n \in E(G)\), \(x_2x_n \in E(G)\), and \(G - \{x_1, x_2\}\) is connected.
     \begin{proof}
-        Suppose \(G\) is \(3\)-connected
+        Suppose \(G\) is \(3\)-connected.
         Since \(G\) is not the complete graph,
         there exists \(u, v \in V(G)\) such that \(uv \notin E(G)\).
         Since \(G\) is connected, there exists a path \(u = u_1, u_2, \ldots, u_\ell = v\) in \(G\), where \(\ell \geq 3\).
