@@ -704,7 +704,8 @@ Note that \nameref{thm:erdos-gallai} is equivalent of stating that
 \end{theorem}
 
 \begin{proof}
-    Define a graph \(L\) with vertex set the set of
+    Let \(e = xy\) be an edge of \(G\).
+    Let \(L\) be the graph whose vertex set is the set of
     Hamiltonian paths \(P\) in \(G - x\) starting at \(y\),
     The edge set of \(L\) is the set of \(PQ\) where
     \begin{equation}
@@ -714,7 +715,6 @@ Note that \nameref{thm:erdos-gallai} is equivalent of stating that
     \begin{equation}
         Q = y v_1 v_2 \ldots v_{w-1} v_w v_z v_{z-1} \ldots v_{w+2} v_{w+1}.
     \end{equation}
-
     Note that, for each \(P \in V(L)\),
     \begin{equation}
         d_L(P) =
@@ -723,13 +723,11 @@ Note that \nameref{thm:erdos-gallai} is equivalent of stating that
             d_G(z) - 1 \equiv 0 \pmod{2} & \text{if } xz \not\in E(G).
         \end{cases}
     \end{equation}
-
     Note that a path \(y v_1 v_2 \ldots v_{w-1} v_w v_{w+1} \ldots v_{z-1} v_z\) 
     has odd degree in \(L\) if and only if \(xz \in E(G)\), that is, \(y v_1 v_2 \ldots v_{w-1} v_w v_{w+1} \ldots v_{z-1} v_z x\) is a Hamiltonian cycle in \(G\).
-
     By the Handshaking Lemma,
-    the number of odd vertices in \(L\) is even,
-    and consequently, the number of odd edges in \(L\) is even.
+    the number of vertices of odd degree in \(L\) is even,
+    and hence the number of Hamiltonian cycles in \(G\) containing \(e\) is even.
 \end{proof}
 
 \begin{conjecture}[Sheehan] \label{conj:sheehan}
