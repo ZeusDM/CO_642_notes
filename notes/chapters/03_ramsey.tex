@@ -667,10 +667,10 @@ Note that \nameref{thm:erdos-gallai} is equivalent of stating that
 
 \section{Hamiltonian Cycles}
 
-\begin{theorem}[Dirac--Pósa Theorem]
+\begin{theorem}[Dirac--Pósa Theorem] \label{thm:dirac-posa}
     Let \(G\) be a graph with \(n\) vertices
     in which
-    \begin{equation}
+    \begin{equation} \label{eq:dirac-posa}
         d(x) + d(y) \geq n
     \end{equation}
     for all nonadjacent vertices \(x\) and \(y\).
@@ -678,22 +678,24 @@ Note that \nameref{thm:erdos-gallai} is equivalent of stating that
 \end{theorem}
 
 \begin{proof}
-    Suppose \(G\) has no Hamiltonian cycle.
-    Let \(P = x_1x_2 \ldots x_\ell\) be a longest path in \(G\).
-    Note that \(d(x) + d(y) \geq n\) for all nonadjacent vertices \(x\) and \(y\)
-    guarantees a path of length at most \(2\) between any two vertices in \(P\).
-    Hence, \(x_1x_\ell \not\in E(G)\), since otherwise if \(\ell = n\),
-    then we get a Hamiltonian cycle, and if \(\ell < n\), then we can extend \(P\)
-    (since \(G\) is connected).
+    Let \(m\), and \(\ell\) be the length of the longest cycle and path in \(G\), respectively.
+    Assume, for the sake of contradiction, that \(G\) does not contain a Hamiltonian cycle;
+    that is, \(m < n\).
+    Let \(C = y_1y_2 \ldots y_{m}\) be a longest cycle in \(G\).
+    Since \(G\) is connected and \(m < n\), there exists \(v \notin V(C)\) such that \(vy_i \in E(G)\) for some \(i\),
+    and consequently \(v y_i y_{i+1} \ldots y_{m}\) is a path in \(G\) of length \(m + 1\).
+    Therefore, \(\ell > m\), and hence there is no cycle of length \(\ell\) in \(G\).
 
+    Let \(P = x_1x_2 \ldots x_\ell\) be a longest path in \(G\).
+    Since there is no cycle of length \(\ell\) in \(G\), \(x_1x_\ell \not\in E(G)\).
     Since \(P\) is longest, \(N(x_1) \subset V(P)\) and \(N(x_\ell) \subset V(P)\).
     Let 
     \begin{equation}
         W = \{x_i : x_{i+1} \in N(x_1)\} \subset V(P).
     \end{equation}
     Since \(|W| = |N(x_1)| = d(x_1)\), \(|N(x_\ell)| = d(x_\ell)\) and \(d(x_1) + d(x_\ell) \geq n\),
-    there exists \(x_j \in W \cap N(x_\ell)\), then \(x_1x_2 \ldots x_j x_\ell x_{\ell-1} \ldots x_{j+1}\) is a cycle,
-    and then we would be able to find a longer path if this is not Hamiltonian.
+    there exists \(x_j \in W \cap N(x_\ell)\),
+    and consequently \(x_1x_2 \ldots x_j x_\ell x_{\ell-1} \ldots x_{j+1}\) is a cycle of length \(\ell\), a contradiction.
 \end{proof}
 
 \begin{theorem}[Thomason] \label{thm:thomason}
