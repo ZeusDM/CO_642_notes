@@ -74,7 +74,8 @@ and
     We prove that any red-blue coloring of the edges of \(K_n\) contains a monochromatic red \(K_s\) or a monochromatic blue \(K_t\).
     Consider a red-blue coloring of the edges of \(K_n\).
     Let \(v\) be a vertex of \(K_n\).
-    Sicne \(\deg(v) = R(s - 1, t) + R(s, t - 1)\),
+    Since \(\deg(v) = n - 1 =  R(s - 1, t) + R(s, t - 1) - 1\),
+    by the Pigeonhole Principle,
     there are at least \(R(s - 1, t)\) edges incident to \(v\) that are red
     or there are at least \(R(s, t - 1)\) edges incident to \(v\) that are blue.
 
@@ -1001,7 +1002,7 @@ As an organizer, one aims to avoid tournaments with property \(S_k\), but it is 
     Let \(k\) and \(n\) be positive integers.
     Assume
     \begin{equation}
-        \binom{n}{k} \left( 1 - \frac{1}{2k} \right)^{n-k} < 1.
+        \binom{n}{k} \left( 1 - \frac{1}{2^k} \right)^{n-k} < 1.
     \end{equation}
     Then, there exists a tournament on \(n\) vertices with property \(S_k\).
 \end{theorem}
@@ -1013,14 +1014,14 @@ Note that \(n > \log 2 k^2 (1 + o(1))\) is a sufficient condition for the assump
     with uniform probability distribution \(\mathbb{P}(T) = 2^{-\binom{n}{2}}\).
     Let \(S \subset [n]\) with \(|S| = k\).
     Define the event \(A_S\) as the event that there is no \(y \notin S\) such that \(y \to x\) for all \(x \in S\).
-    Note that the probability that, given \(y \notin S\), \(y \to x\) for all \(x \in S\) is \(\frac{1}{2k}\), and hence
+    Note that the probability that, given \(y \notin S\), \(y \to x\) for all \(x \in S\) is \(\frac{1}{2^k}\), and hence
     \begin{equation}
-        \mathbb{P}[A_S] = \left( 1 - \frac{1}{2k} \right)^{n-k}.
+        \mathbb{P}[A_S] = \left( 1 - \frac{1}{2^k} \right)^{n-k}.
     \end{equation}
 
     Therefore, using the Union Bound,
     \begin{equation}
-        \mathbb{P}\left[ \bigcup_{|S| = k} A_S \right] \leq \binom{n}{k} \left( 1 - \frac{1}{2k} \right)^{n-k} < 1,
+        \mathbb{P}\left[ \bigcup_{|S| = k} A_S \right] \leq \binom{n}{k} \left( 1 - \frac{1}{2^k} \right)^{n-k} < 1,
     \end{equation}
     and hence there exists a tournament not in any of the events \(A_S\), that is, a tournament with property \(S_k\).
 \end{proof}
