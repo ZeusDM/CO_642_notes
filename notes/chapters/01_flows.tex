@@ -707,6 +707,238 @@ We can also use Corollary~\ref{cor:flow_cut_edge} to claim that the flow polynom
 	Similarly, \(P_{K_4}(3) = 6\), which implies that \(K_4\) has \(6\) \(\mathbb{Z}_4\)-flows, as well as \(6\) \((\mathbb{Z}_2 \times \mathbb{Z}_2)\)-flows.
 \end{example}
 
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[rotate=90, scale=.8]
+		\graph[edge quotes={fill=white,inner sep=1pt}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+		0 -- 1 -- 2 -- 3 -- 4,
+		{ [same layer] 1, 5 },
+		{ [same layer] 3, 4 },
+		5 -- {0, 1, 2},
+		4 -- {2},
+		};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:hw1ex1a}
+\end{figure}
+
+\begin{example}[Homework 1, Exercise 1a]
+	Let \(G\) be the graph in Figure~\ref{fig:hw1ex1a}.
+	We compute the flow polynomial of \(G\)
+	and determine whether the graph has a \(4\)-flow.
+
+	We compute
+    \begin{align*}
+        P_{
+        \begin{tikzpicture}[rotate=90, scale=.7]
+            \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+            0 --["\(e_0\)"] 1 -- 2 -- 3 -- 4,
+            { [same layer] 1, 5 },
+            { [same layer] 3, 4 },
+            5 -- {0, 1, 2},
+            4 -- {2},
+            };
+        \end{tikzpicture}
+        }
+        % first line
+        \ \  & =\ \
+        P_{
+                \begin{tikzpicture}[rotate=90, scale=.7]
+                    \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                    1 --["\(e_1\)"] 2 -- 3 -- 4,
+                    { [same layer] 1, 5 },
+                    { [same layer] 3, 4 },
+                    1 --[bend right=10] 5,
+                    1 --[bend left=10] 5,
+                    5 -- 2,
+                    4 -- 2,
+                    };
+                \end{tikzpicture}
+            }
+        -
+        \textcolor{red!80!black}{
+            P_{
+                    \begin{tikzpicture}[rotate=90, scale=.7]
+                        \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                        0 --[white] 1 -- 2 -- 3 -- 4,
+                        { [same layer] 1, 5 },
+                        { [same layer] 3, 4 },
+                        5 -- {0, 1, 2},
+                        4 -- {2},
+                        };
+                    \end{tikzpicture}
+                }
+        }
+        % second line
+        \ \ =\ \
+        P_{
+                \begin{tikzpicture}[rotate=90, scale=.7]
+                    \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                    5 -- 2 --["\(e_2\)"] 3 -- 4,
+                    { [same layer] 3, 4 },
+                    2 --[bend right=30] 5,
+                    2 --[bend left=30] 5,
+                    4 -- 2,
+                    };
+                \end{tikzpicture}
+            }
+        -
+        \textcolor{red!80!black}{
+            P_{
+                    \begin{tikzpicture}[rotate=90, scale=.7]
+                        \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                        1 --[white] 2 -- 3 -- 4,
+                        { [same layer] 1, 5 },
+                        { [same layer] 3, 4 },
+                        1 --[bend right=10] 5,
+                        1 --[bend left=10] 5,
+                        5 -- 2,
+                        4 -- 2,
+                        };
+                    \end{tikzpicture}
+                }
+        }
+        \\
+        % third line
+        \ \  & =\ \
+        P_{
+                \begin{tikzpicture}[rotate=90, scale=.7]
+                    \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                    5 -- 2 --["\(e_3\)", bend right=30] 4,
+                    2 --[bend left=30] 4,
+                    2 --[bend right=30] 5,
+                    2 --[bend left=30] 5,
+                    };
+                \end{tikzpicture}
+            }
+        -
+        \textcolor{red!80!black}{
+            P_{
+                    \begin{tikzpicture}[rotate=90, scale=.7]
+                        \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                        5 -- 2 --[white] 3 -- 4,
+                        { [same layer] 3, 4 },
+                        2 --[bend right=30] 5,
+                        2 --[bend left=30] 5,
+                        4 -- 2,
+                        };
+                    \end{tikzpicture}
+                }
+        }
+        % fourth line
+        \ \ =\ \
+        P_{
+                \begin{tikzpicture}[rotate=90, scale=.7]
+                    \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                    5 --["\(e_4\)"] 2,
+                    2 --[bend right=40] 5,
+                    2 --[bend left=40] 5,
+                    2 --[loop, in=-40, out=-120, looseness=10] 2,
+                    };
+                \end{tikzpicture}
+            }
+        -
+        \textcolor{red!80!black}{
+            P_{
+                    \begin{tikzpicture}[rotate=90, scale=.7]
+                        \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                        5 -- 2,
+                        2 -- 4,
+                        2 --[bend right=30] 5,
+                        2 --[bend left=30] 5,
+                        };
+                    \end{tikzpicture}
+                }
+        }
+        % fifth line
+        \\
+        \ \  & =\ \
+        P_{
+                \begin{tikzpicture}[rotate=90, scale=.7]
+                    \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                    2 --[loop, in=-40, out=-120, looseness=10] 2,
+                    2 --[loop, in=80, out=0, looseness=10] 2,
+                    2 --[loop, in=200, out=120, looseness=10] 2,
+                    2 --[loop, in=320, out=240, looseness=10] 2,
+                    };
+                \end{tikzpicture}
+            }
+        -
+        P_{
+                \begin{tikzpicture}[rotate=90, scale=.7]
+                    \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                    5 --[bend right=40, "\(e_5\)"] 2,
+                    5 --[bend left=40] 2,
+                    2 --[loop, in=-40, out=-120, looseness=10] 2,
+                    };
+                \end{tikzpicture}
+            }
+        % sixth line
+        \ \ =\ \
+        P_{
+                \begin{tikzpicture}[rotate=90, scale=.7]
+                    \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                    2 --[loop, in=-40, out=-120, looseness=10] 2,
+                    2 --[loop, in=80, out=0, looseness=10] 2,
+                    2 --[loop, in=200, out=120, looseness=10] 2,
+                    2 --[loop, in=320, out=240, looseness=10] 2,
+                    };
+                \end{tikzpicture}
+            }
+        -
+        P_{
+                \begin{tikzpicture}[rotate=90, scale=.7]
+                    \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                    2 --[loop, in=-40, out=-120, looseness=10] 2,
+                    2 --[loop, in=140, out=60, looseness=10] 2,
+                    };
+                \end{tikzpicture}
+            }
+        +
+        \textcolor{red!80!black}{
+            P_{
+                    \begin{tikzpicture}[rotate=90, scale=.7]
+                        \graph[edge quotes={fill=white,inner sep=1pt, scale=.7}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+                        5 -- 2,
+                        2 --[loop, in=-40, out=-120, looseness=10] 2,
+                        };
+                    \end{tikzpicture}
+                }
+        }
+        \\
+        \ \  & =\ \  x^3 - x^2,
+    \end{align*}
+    where the \(i\)\textsuperscript{th} equality is obtained by applying the first fact to the edge \(e_i\),
+    the red terms are zero by the second fact,
+    and the last equality is obtained by applying the third fact to the remaining flow polynomials.
+
+    Let \(G\) denote the graph in Figure~\ref{fig:hw1ex1a}.
+    Since \(P_G(|\mathbb{Z}_4|-1) = P_G(3) = 18 > 0\),
+    there exists a \(\mathbb{Z}_4\)-flow in \(G\).
+    Consequently,
+    by the \(\mathbb{Z}_k\)-flow-implies-\(k\)-flow theorem,
+    there exists a \(4\)-flow in \(G\).
+    For concreteness,
+	Figure~\ref{fig:hw1ex1a-4flow} shows a \(4\)-flow for \(G\).
+\end{example}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[rotate=90, scale=1.6]
+        \graph[edge quotes={fill=white,inner sep=2pt}, layered layout, empty nodes, nodes={circle, fill, minimum size=3pt, inner sep=0pt}] {
+        0 ->["1"] 1 <-["1"] 2 ->["1"] 3 ->["1"] 4,
+        { [same layer] 1, 5 },
+        { [same layer] 3, 4 },
+        5 ->["1"] 0,
+        5 <-["2"] 1,
+        5 ->["1"] 2,
+        4 ->["1"] 2,
+        };
+    \end{tikzpicture}
+    \caption{A \(4\)-flow for the graph in Figure~\ref{fig:hw1ex1a}.}
+    \label{fig:hw1ex1a-4flow}
+\end{figure}
+
 As exemplified, the algorithm induced by the proof of Tutte's theorem takes exponential time.
 There's a line of research in studying properties and algorithms for flow polynomials.
 
@@ -874,7 +1106,7 @@ Note that, if \(G_1\) and \(G_2\) are edge-disjoint, then a \(k\)-flow on \(G_1\
 	The Petersen graph has flow number \(5\).
 \end{proposition}
 
-\begin{figure}
+\begin{figure}[htbp]
 	% The Petersen graph:
 	\centering
 	\begin{tikzpicture}[scale = .5]
@@ -898,7 +1130,87 @@ Note that, if \(G_1\) and \(G_2\) are edge-disjoint, then a \(k\)-flow on \(G_1\
 		\draw (I) -- (D);
 		\draw (J) -- (E);	
 	\end{tikzpicture}
+	\caption{The Petersen graph.}
 \end{figure}
+
+\begin{proposition}[Homework 1, Exercise 1b]
+Let \(G\) be a graph that has a \(4\)-flow.
+There exists a collection \(\mathcal{C}\) of (not necessarily distinct) cycles in \(G\) such that every edge of \(G\) is in exactly two elements of \(\mathcal{C}\).
+\end{proposition}
+
+\begin{proof}[Solution]
+    Let \(G = (V, E)\) be a graph.
+    Assume that \(G\) has a \(4\)-flow \(f \colon \vec{E} \to \mathbb{Z}\).
+    By composing \(f\) with the canonical projection \(\mathbb{Z} \to \mathbb{Z}_4\),
+    we obtain a \(\mathbb{Z}_4\)-flow \( f_1 \colon \vec{E} \to \mathbb{Z}_4\).
+    By composing \(f_1\) with the canonical projection \(\mathbb{Z}_4 \to \mathbb{Z}_2\),
+    we obtain a \(\mathbb{Z}_2\)-circulation \( f_2 \colon \vec{E} \to \mathbb{Z}_2\).
+
+    Since \(f(\vec{e}) = -f(\cev{e})\) for all \(\vec{e} \in \vec{E}\),
+    we have that \(f(\vec{e}) \equiv_2 f(\cev{e})\) for all \(\vec{e} \in \vec{E}\).
+    Therefore,
+    let
+    \begin{align*}
+        P & = \{ e \in E : f(\vec{e}) \equiv_2 0 \}, \text{and} \\
+        I & = \{ e \in E : f(\vec{e}) \equiv_2 1 \},
+    \end{align*}
+    where the ambiguity in the direction of \(\vec{e}\) is irrelevant since either chioce yields the same parity of \(f(\vec{e})\).
+    Note that \(E = P \cup I\).
+
+    Let \(G_1 = (V, I)\).
+    Note that \(f_2(\vec{e}) = 0\) if, and only if, \(\vec{e} \in \vec{P}\).
+    Since \(f_2\) assigns zero to the edges of \(P\),
+    by ignoring the edges of \(P\),
+    we obtain an \(\mathbb{Z}_2\)-circulation \(f_3\) in \(G_1\).
+    Since \(f_3\) only assigns nonzero values,
+    \(f_3\) is a \(\mathbb{Z}_2\)-flow in \(G_1\).
+    Therefore, by the characterization of graphs with \(\mathbb{Z}_2\)-flows,
+    \(G_1\) is an even graph.
+
+    Let \(G_2 = (V, I \cup P_A \cup P_B)\),
+    where \(P_A\) and \(P_B\) are two copies of \(P\).
+    Let \(V = \{ v_1, \ldots, v_{|V|} \}\).
+    For each edge \(e \in P\), let \(e_A\) and \(e_B\) be its copies in \(P_A\) and \(P_B\), respectively.
+    Define the function \(g_1 \colon \vec{I} \cup \vec{P_A} \cup \vec{P_B} \to \mathbb{Z}_4\) by
+    \begin{equation*}
+        g_1(e, v_i, v_j)
+        \equiv_4
+        \begin{cases}
+            f_1(e, v_i, v_j) & \text{if } e \in \vec{I},                         \\
+            1                & \text{if } e \in P_A \cup P_B \text{ and } i < j  \\
+            -1               & \text{if } e \in P_A \cup P_B \text{ and } i > j.
+        \end{cases}
+    \end{equation*}
+    In imprecise terms, \(g_1\) is obtained from \(f_1\) by splitting each directed edge \(\vec{e}\) from \(v_i\) to \(v_j\), \(i < j\), with \(f_1(\vec{e}) \equiv_4 2\) into two copies \(\vec{e_A}\) and \(\vec{e_B}\) with \(g_1(\vec{e_A}) \equiv_4 g_1(\vec{e_B}) \equiv_4 1\).
+    Note that, for each \(1 \leq i < j \leq |V|\),
+    \begin{align*}
+        f_1(x_i, x_j)
+         & \equiv_4 \sum_{(e, x_i, x_j) \in I} f_1(e, x_i, x_j) + \sum_{(e, x_i, x_j) \in P} 2            \\
+         & \equiv_4 \sum_{(e, x_i, x_j) \in I} f_1(e, x_i, x_j) + \sum_{(e, x_i, x_j) \in P_A \cup P_B} 1
+        \equiv_4 g_1(x_i, x_j).
+    \end{align*}
+    Therefore, since \(f_1\) is a \(\mathbb{Z}_4\)-flow in \(G\) and
+    the sum of the flows between any two vertices is the same in \(f_1\) and \(g_1\),
+    it follows that \(g_1\) is a \(\mathbb{Z}_4\)-flow in \(G_2\).
+
+    By composing \(g_1\) with the canonical projection \(\mathbb{Z}_4 \to \mathbb{Z}_2\),
+    we obtain a \(\mathbb{Z}_2\)-circulation \(g_2\) in \(G_2\)
+    Furthermore, note that \(g_1\) only assings odd values,
+    and therefore \(g_2\) also only assigns odd values,
+    and thus \(g_2\) is a \(\mathbb{Z}_2\)-flow in \(G_2\).
+    Therefore, by the characterization of graphs with \(\mathbb{Z}_2\)-flows,
+    \(G_2\) is an even graph.
+
+    Finally, for each \(i \in \{1, 2\}\),
+    since \(G_i\) is an even graph,
+    there exists a collection \(\mathcal{C}_i\) of (not necessarily distinct) cycles in \(G_i\) such that every edge of \(G_i\) is in exactly one element of \(\mathcal{C}_i\).
+    Note that every edge of \(I\) is in exactly one element of \(\mathcal{C}_1\),
+    and in exactly one element of \(\mathcal{C}_2\);
+    while every edge of \(P\) is in no element of \(\mathcal{C}_1\),
+    and in exactly two elements of \(\mathcal{C}_2\).
+    Let \(\mathcal{C} = \mathcal{C}_1 \cup \mathcal{C}_2\).
+    It follows that every edge of \(G\) is in exactly two elements of \(\mathcal{C}\), as desired.
+\end{proof}
 
 \begin{conjecture}[Tutte's \(5\)-flow conjecture (1954)]
 	Every bridgeless multigraph has a \(5\)-flow.
@@ -914,6 +1226,175 @@ Note that, if \(G_1\) and \(G_2\) are edge-disjoint, then a \(k\)-flow on \(G_1\
 
 These conjectures were thought to help in proving the Four-Color Theorem.
 All of these conjectures are true for planar graphs.
+
+We first prove that every bridgeless multigraph has a bounded flow number.
+
+\begin{proposition}[Homework 1, Exercise 2] \label{prop:hw1ex2}
+Let \(G\) be a multigraph with at least one edge.
+Suppose there exist \(k \geq 1\) and spanning trees \(T_1, \ldots, T_k\) in \(G\) such that \(\bigcap_{i=1}^k E\left(T_i\right)=\varnothing\).
+The flow number \(\varphi(G)\) of \(G\) satisfies \(\varphi(G) \leq 2^k\),
+and \(k\) is at most the length of the longest simple cycle in \(G\).
+\end{proposition}
+
+The proof of Proposition~\ref{prop:hw1ex2} is split into three parts: Lemma~\ref{lem:spanning-trees-longest-cycle} gives a suitable value of \(k\) in terms of the parameters of \(G\),
+Lemma~\ref{lem:circulation-extension} shows that a function defined on the complement of the edges of a spanning tree can be extended to a circulation,
+and finally the proof of Proposition~\ref{prop:hw1ex2} is given.
+
+\begin{lemma} \label{lem:spanning-trees-longest-cycle}
+    Let \(G = (V, E)\) be a bridgeless multigraph whose longest simple cycle has length at most \(\ell\).
+    Then, there exists spanning trees \(T_1, \ldots, T_\ell\) in \(G\) such that \(\bigcap_{i=1}^\ell E(T_i) = \varnothing\).
+\end{lemma}
+
+\begin{proof}
+    The proof is by induction on \(|V|\).
+    Suppose that the lemma holds for all bridgeless multigraphs with fewer than \(|V|\) vertices.
+
+    Let \(C = (V_C, E_C)\) be a simple cycle in \(G\), hence \(1 \leq |V_C| \leq \ell\).
+    Let \(e_1, \ldots, e_{|V_C|}\) be the edges of \(C\).
+    Let \(S_i = C - \{e_i\}\) for all \(i \in \{1, \ldots, |V_C|\}\).
+    Let \(S_j = S_1\) for all \(i \in \{|V_C|+1, \ldots, \ell\}\).
+    Then, \(S_1, \ldots, S_\ell\) are spanning trees in \(C\) such that
+    \(\bigcap_{i=1}^\ell E(S_i) = \varnothing\).
+
+    If \(V_C = V\), then \(S_1, \ldots, S_\ell\) are spanning trees in \(G\) such that \(\bigcap_{i=1}^\ell E(S_i) = \varnothing\), as desired.
+    Otherwise, let \(G' = G / C\) be the multigraph obtained by contracting \(C\).
+    Note that \(G'\) is bridgeless,
+    \(|V(G')| = |V| - |V_C| + 1 < |V|\),
+    and the longest simple cycle of \(G'\) has length at most \(\ell\).
+    By the induction hypothesis,
+    there exists spanning trees \(R_1, \ldots, R_{\ell}\) in \(G'\) such that \(\bigcap_{i=1}^\ell E(R_i) = \varnothing\).
+    Let \(\tilde{R}_i\) as the graph obtained by expanding \(R_i\) to the corresponding subgraph of \(G\), for all \(i \in \{1, \ldots, \ell\}\).
+
+    Define \(T_i = S_i \cup \tilde{R}_i\) for all \(i \in \{1, \ldots, \ell\}\).
+    Since \(S_i\) is connected and \(T_i / S_i = R_i\) is connected, it follows that \(T_i\) is connected.
+    Since \(T_i\) is connected and has \(|V|-1\) edges, it follows that \(T_i\) is a spanning tree in \(G\).
+    Finally,
+    \begin{equation*}
+        \bigcap_{i=1}^\ell E(T_i)
+        =
+        \bigcap_{i=1}^\ell E(S_i) \cup \bigcap_{i=1}^\ell E(\tilde{R}_i)
+        = \varnothing.
+    \end{equation*}
+    Therefore, \(T_1, \ldots, T_\ell\) are spanning trees in \(G\) such that \(\bigcap_{i=1}^\ell E(T_i) = \varnothing\), as desired.
+\end{proof}
+
+\begin{lemma} \label{lem:circulation-extension}
+    Let \(G = (V, E)\) be a multigraph, and let \(T = (V_T, E_T)\) be a tree in \(G\).
+    Let \(H\) be an abelian group.
+    Let \(f \colon \vec{E} - \vec{E_T} \to H\) be a function such that, for all \(\vec{e} \in \vec{E} - \vec{E_T}\),
+    \begin{equation} \label{eq:vec-cev}
+        f(\vec{e}) = -f(\cev{e}),
+    \end{equation}
+    and for all \(v \in V - V_T\),
+    \begin{equation} \label{eq:sum-zero}
+        \sum_{\vec{e} \in (\vec{E} - \vec{E_T})(v, V)} f(\vec{e}) = 0.
+    \end{equation}
+    Then, there exists an extension of \(f\) to a function \(\hat{f} \colon \vec{E} \to H\) such that \(\hat{f}\) is an \(H\)-circulation in \(G\).
+\end{lemma}
+
+\begin{proof}
+    The proof is by induction on \(|V_T|\).
+    Suppose \(|V_T| \geq 1\).
+    Let \(x\) be the unique vertex of \(T\).
+    Note that \(E_T = \varnothing\).
+    By Eq~\eqref{eq:vec-cev}, we have that
+    \begin{equation}
+        \sum_{\vec{e} \in \vec{E}(V, V)} f(\vec{e}) = 0.
+    \end{equation}
+    Furthermore, by Eq~\eqref{eq:sum-zero} applied to all \(v \neq x\),
+    \begin{equation}
+        0
+        =
+        \sum_{\vec{e} \in \vec{E}(V, V)} f(\vec{e})
+        =
+        \sum_{v \in V} \sum_{\vec{e} \in \vec{E}(v, V)} f(\vec{e})
+        =
+        \sum_{\vec{e} \in \vec{E}(x, V)} f(\vec{e}),
+    \end{equation}
+    which implies that \(\hat{f} = f \colon \vec{E} \to H\) is an \(H\)-circulation in \(G\).
+
+    Suppose \(|V_T| \geq 2\).
+    Let \(x \in V_T\) be a leaf of \(T\).
+    Let \(e_0\) be the unique edge incident to \(x\) in \(T\),
+    and let \(y\) be the other endpoint of \(e_0\).
+    Define \(T' = (V_T - \{x\}, E_T - \{e_0\})\).
+    Define \(\tilde{f} \colon \vec{E} - \vec{E_{T'}} \to H\) by
+    \(
+    \tilde{f}(\vec{e}) = f(\vec{e})
+    \)
+    if \(\vec{e} \in \vec{E} - \vec{E_{T}}\),
+    and
+    \begin{equation}
+        \tilde{f}(e_0, x, y)
+        = -\tilde{f}(e_0, y, x)
+        = -\sum_{\vec{e} \in (\vec{E} - \vec{E_T})(x, V)} f(\vec{e}).
+    \end{equation}
+
+    It is straighforward to verify that \(\tilde{f}\) satisfies Eq~\eqref{eq:vec-cev} and Eq~\eqref{eq:sum-zero} for \(T'\), and that \(|V_{T'}| = |V_T| - 1\).
+    Therefore, by the induction hypothesis, there exists an extension \(\hat{f} \colon \vec{E} \to H\) of \(\tilde{f}\) such that \(\hat{f}\) is an \(H\)-circulation in \(G\).
+    Finally, \(\hat{f}\) is an extension of \(f\) such that \(\hat{f}\) is an \(H\)-circulation in \(G\).
+
+    In conclusion, by induction on \(|V_T|\), the lemma holds.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:hw1ex2}]
+    Let \(G = (V, E)\) be a multigraph with at least one edge,
+    and let \(T_1 = (V, E_1), \ldots, T_k = (V, E_k)\) be spanning trees in \(G\) such that \(\bigcap_{i=1}^k E_i = \varnothing\).
+    For each \(i \in \{1, \ldots, k\}\),
+    let \(f_i \colon \vec{E} - \vec{E_i} \to \mathbb{Z}_2\) be the function defined by \(f_i(\vec{e}) \equiv_2 1\) for all \(\vec{e} \in \vec{E} - \vec{E_i}\).
+    By Lemma~\ref{lem:circulation-extension},
+    there exists an extension \(\hat{f}_i \colon \vec{E} \to \mathbb{Z}_2\) of \(f_i\) such that \(\hat{f}_i\) is a \(\mathbb{Z}_2\)-circulation in \(G\).
+    By a similar argument as in the proof of the \(\mathbb{Z}_k\)-flow-implies-\(k\)-flow theorem,%
+    \footnote{Ignore all edges which are assigned zero
+        to obtain a \(\mathbb{Z}_k\)-flow in the remaining graph;
+        by the \(\mathbb{Z}_k\)-flow-implies-\(k\)-flow construction,
+        there is a congruent \(k\)-flow in the remaining graph;
+        by putting back the ignored edges,
+        there is a \(k\)-circulation in the original graph.}
+    there exists a congruent \(2\)-circulation \(g_i \colon \vec{E} \to \mathbb{Z}_2\) in \(G\).
+    Since \(g_i(\vec{e}) \equiv_2 f_i(\vec{e}) \equiv_2 1\) for all \(\vec{e} \in \vec{E} - \vec{E_i}\),
+    it follows that \(g_i(\vec{e}) = \pm 1\) for all \(\vec{e} \in \vec{E} - \vec{E_i}\).
+
+    In summary, for each \(i \in \{1, \ldots, k\}\),
+    the \(2\)-circulation \(g_i\) has the properties that
+    \begin{align}
+        |g_i(\vec{e})| \leq 1 & \text{ for all } \vec{e} \in \vec{E}, \text{ and}                            \\
+        g_i(\vec{e}) = \pm 1  & \text{ for all } \vec{e} \in \vec{E} - \vec{E_i}. \label{eq:nonzero-nontree}
+    \end{align}
+
+    Let \(g = \sum_{i=1}^k 2^{i-1} g_i\), which is a \(\mathbb{Z}\)-circulation in \(G\).
+    Since, for all \(\vec{e} \in \vec{E}\),
+    \begin{equation}
+        \thickmuskip=15mu
+        |g(\vec{e})| =
+        \left|\sum_{i=1}^{k} 2^{i-1} g_i(\vec{e})\right| \leq
+        \sum_{i=1}^{k} 2^{i-1} |g_i(\vec{e})| \leq
+        \sum_{i=1}^{k} 2^{i-1} = 2^k - 1,
+    \end{equation}
+    it follows that \(g\) is a \(2^k\)-circulation in \(G\).
+
+    Finally, we prove that \(g\) is a \(2^k\)-flow in \(G\), that is, that \(g\) does not assign zero to any edge.
+    Let \(\vec{e} = (e, x, y) \in \vec{E}\).
+    Since \(\bigcap_{i=1}^k E_i = \varnothing\), there exists \(j \in \{1, \ldots, k\}\) such that \(e \in E - E_j\).
+    Therefore, \(g_j(\vec{e}) = \pm 1\).
+    Note that
+    \begin{equation}
+        \thickmuskip=15mu
+        |\sum_{i=1}^j 2^{i-1} g_i(\vec{e})| \geq |2^{j-1} g_j(\vec{e})| - |\sum_{i=1}^{j-1} 2^{i-1} g_i(\vec{e})| \geq 2^{j-1} - \sum_{i=1}^{j-1} 2^{i-1} = 1,
+    \end{equation}
+    hence \(\sum_{i=1}^j 2^{i-1} g_i(\vec{e}) \neq 0\).
+    Consequently,
+    \begin{equation}
+        g(\vec{e}) = \sum_{i=1}^k 2^{i-1} g_i(\vec{e}) \equiv_{2^k} \sum_{i=1}^j 2^{i-1} g_i(\vec{e}) \not\equiv_{2^k} 0,
+    \end{equation}
+    and this \(g(\vec{e})\) is nonzero.
+    Therefore, \(g\) is a \(2^k\)-flow in \(G\).
+
+    Finally, by Lemma~\ref{lem:spanning-trees-longest-cycle},
+    a suitable choice of \(k\) is \(\ell\),
+    where \(\ell\) is the length of the longest simple cycle in \(G\).
+    Therefore, \(\varphi(G) \leq 2^\ell\), and \(\varphi(G)\) is finite for every bridgeless multigraph.
+\end{proof}
 
 We will prove an weaker version of Tutte's \(5\)-flow conjecture.
 
@@ -984,7 +1465,7 @@ We will prove an weaker version of Tutte's \(5\)-flow conjecture.
 	\begin{gather}
 		\bigcup_{t = 0}^{s} V(H_t) = V \\
 		F_t \subseteq E(H_t) \text{ for all } t \in \{1, \dots, s\}, \\
-		|F_t| \in \{1, 2\} \text{ for all } t \in \{1, \dots, s\}, \\
+		|F_t| \in \{1, 2\} \text{ for all } t \in \{1, \dots, s\}.
 	\end{gather}
 
 	We define an \(\mathbb{Z}_3\)-circulation \(f\) by reverse induction.
