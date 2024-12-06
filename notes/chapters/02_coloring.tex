@@ -89,6 +89,73 @@ We can refine this bound by choosing the order of the vertices carefully.
     the greedy coloring of \(G\) with respect to the order \(x_1, x_2, \ldots, x_n\) uses at most \(k + 1\) colors.
 \end{proof}
 
+We prove a generalization of Proposition~\ref{prop:greedy-coloring-delta-plus-one} for another coloring problem which is not proper coloring.
+
+\begin{proposition}[Homework 1, Exercise 4] \label{prop:hw1-ex4}
+Let \(G\) be a graph and let \(d_1, d_2, \ldots, d_k\) be non-negative integers such that
+\begin{equation*}
+    \sum_{i=1}^k d_i \geq \Delta(G)-k+1.
+\end{equation*}
+Then, the vertex set \(V(G)\) can be partitioned into \(k\) classes such that
+the subgraph \(G_i\) induced by the \(i\)\textsuperscript{th} class has \(\Delta\left(G_i\right) \leq d_i\).
+\end{proposition}
+
+Note that Proposition~\ref{prop:greedy-coloring-delta-plus-one} is recovered from Proposition~\ref{prop:hw1-ex4} by setting \(k = \Delta(G) + 1\) and \(d_1 = d_2 = \ldots = d_k = 1\).
+
+\begin{proof}
+Let \(G = (V, E)\) with maximum degree \(\Delta\).
+Given an assignment \(c \colon V \to \{1, \ldots, k\}\) of classes to vertices,
+let \(\mathcal{N}^c_i(v)\) denote the set of neighbors of \(v\) in \(G\) that are in the \(i\)\textsuperscript{th} class.
+Define the \emph{energy} of \(c\) to be
+\begin{equation}
+    \varepsilon(c) = \sum_{\{u, v\} \subset V}
+    \frac{
+        \chi[c(u) = c(v) \text{ and } uv \in E]
+    }{
+        d_{c(u)} + 1
+    }.
+\end{equation}
+Let \(c\) minimize \(\varepsilon(c)\) over all (finitely many) assignments of classes to vertices.
+
+Assume,
+for the sake of contradiction,
+that there exists \(i \in \{1, \ldots, k\}\) and a vertex \(x\) such that \(c(x) = i\) and \(|\mathcal{N}^c_i(x)| \geq d_{c(x)} + 1\).
+Observe that \( \frac{|\mathcal{N}^c_i(x)|}{d_i + 1} \geq 1 \).
+Note that
+\begin{equation}
+    \thickmuskip=15mu
+    \sum_{i=1}^k |\mathcal{N}^c_i(x)| = |\mathcal{N}(x)| \leq \Delta < \Delta + 1 \leq \sum_{i=1}^k (d+1).
+\end{equation}
+Therefore, for some \(j\), we have that \(|\mathcal{N}^c_j(x)| < d_j + 1\).
+Observe that \( \frac{|\mathcal{N}^c_j(x)|}{d_j + 1} < 1 \).
+
+Consider the assignment \(\bar{c}\) obtained from \(c\) by moving \(x\) from class \(i\) to class \(j\).
+Then,
+\begin{align}
+    \varepsilon(c) - \varepsilon(\bar{c})
+     & = \sum_{\{u, v\} \subset V} \left(
+    \frac{\chi[c(u) = c(v) \text{ and } uv \in E]}{d_{c(u) + 1}}
+    -
+    \frac{\chi[\bar{c}(u) = \bar{c}(v) \text{ and } uv \in E]}{d_{\bar{c}(u) + 1}}
+    \right)                                                                               \\
+     & = \sum_{v \in V \setminus \{x\}}
+    \left(
+    \frac{\chi[c(v) = i \text{ and } xv \in E]}{d_i + 1}
+    -
+    \frac{\chi[c(v) = j \text{ and } xv \in E]}{d_j + 1}
+    \right) \label{eq:ex4:onlyx}                                                          \\
+     & = \frac{|\mathcal{N}^c_i(x)|}{d_i + 1} - \frac{|\mathcal{N}^c_j(x)|}{d_j + 1} > 1 - 1 = 0,
+\end{align}
+where the equality in \eqref{eq:ex4:onlyx} follows from the observation that the summands are zero whenever \(x \notin \{u, v\}\).
+Hence, \(\varepsilon(c) > \varepsilon(\bar{c})\), which contradicts the minimality of \(\varepsilon(c)\).
+
+Therefore,
+for all \(i \in \{1, \ldots, k\}\),
+we have that \(|\mathcal{N}^c_i(x)| \leq d_i\) for all \(x \in V\).
+Consequently,
+the subgraph \(G_i\) induced by the \(i\)\textsuperscript{th} class has \(\Delta\left(G_i\right) \leq d_i\), as desired.
+\end{proof}
+
 Recall that a graph that is connected but not \(2\)-connected has a block decomposition: a tree-like structure consisting of maximal connected subgraphs without a cut vertex, that intersect only at cut vertices.
 
 In Propositions~\ref{prop:greedy-coloring-tight-complete} and~\ref{prop:greedy-coloring-tight-odd-cycle},
@@ -163,6 +230,30 @@ However, these are the only (connected) cases where the bound is tight, and \nam
     \(x_i\) has at most \(\Delta(G) - 1\) neighbors in \(\{x_1, x_2, \ldots, x_{i-1}\), and hence \(c(x_i) \leq \Delta(G)\).
     Moreover, since \(x_1\) and \(x_2\) are adjacent to \(x_n\) and \(c(x_1) = c(x_2)\), the \(\Delta(G)\) neighbors of \(x_n\) have at most \(\Delta(G) - 1\) colors, and hence \(c(x_n) \leq \Delta(G)\).
     Therefore, \(\chi(G) \leq \Delta(G)\), and the theorem follows.
+\end{proof}
+
+\begin{proposition}[Homework 1, Exercise 5] \label{prop:hw1-ex5}
+Let \(r\) and \(\Delta\) be integers with \(4 \leq r \leq \Delta + 1\).
+Suppose \(t = \frac{r-1}{r}(\Delta + 1)\) is an integer.
+Let \(G = (V, E)\) be a graph with maximum degree \(\Delta\)
+that does not contain a complete subgraph \(K_r\).
+Then, \(\chi(G) \leq t\).
+\end{proposition}
+
+\begin{proof}[Solution]
+    Define \( k = (\Delta + 1) - t\), which is an integer.
+    Note that \(k = \frac{\Delta + 1}{r}\), and consequently
+    \( kr = \Delta + 1 \) and \(t = k(r-1)\).
+    By Proposition~\ref{prop:hw1-ex4},
+    \( \sum_{i=1}^k (r-1) = k(r-1) = kr - k = \Delta - k + 1 \),
+    it follows that \(V\) has a partition into \(k\) classes such that the subgraph \(G_i\) induced by the \(i\)\textsuperscript{th} class has \(\Delta\left(G_i\right) \leq r - 1\).
+    For each \(i \in \{1, \ldots, k\}\),
+    since
+    \(\Delta(G_i) \leq r-1\), with \(r - 1 \geq 3\), and
+    \(G_i\) is not the complete graph \(K_r\),
+    by \nameref{thm:brooks-theorem},
+    it follows that \(\chi(G_i) \leq r-1\).
+    Therefore, \(\chi(G) \leq \sum_{i=1}^k \chi(G_i) \leq k(r-1) = t\), as desired.
 \end{proof}
 
 \begin{question}
