@@ -608,6 +608,152 @@ We are now ready to prove Kneser's Conjecture.
     and hence \(\chi(K(2k+\ell, k)) > \ell + 1\).
 \end{proof}
 
+With \nameref{thm:kneser-conjecture}, we can prove Proposition~\ref{prop:hw2-ex2},
+which shows that there exists a graph with girth at least \(4\) and arbitrarily large chromatic number.
+In Section~\ref{section:high-girth-high-chromatic-number}, we will improve this result and show that there exists a graph with arbitrarily large girth and chromatic number.
+
+\begin{proposition}[Homework 2, Exercise 2] \label{prop:hw2-ex2}
+    Let \(k \geq 1\) be an integer.
+    The Kneser graph \(G = K\big(2k + (k-2), k-1\big)\) is a triangle-free vertex-transitive%
+    \footnote{Recall that an automorphism of a graph \(G\) is a bijective map \(f: V(G) \rightarrow V(G)\) such that \(v w \in E(G)\) if and only if \(f(v) f(w) \in E(G)\). A graph is said to be vertex transitive if for each pair \(u\), \(v\) of vertices there exists an automorphism \(f\) of \(G\) such that \(f(u)=v\).}
+    graph with \(\chi(G) \geq k\).
+\end{proposition}
+
+\begin{proof}
+    The result for \(k = 1\) and \(k = 2\) follows from \(k = 3\),
+    therefore, we assume without loss of generality that \(k \geq 3\).
+    Let \(n = k - 1\). Then, \(3n > 2n + k - 2\).
+
+    Consider the Kneser graph \(G = K\big(2n + (k-2), n\big)\),
+    whose vertices are the \(n\)-subsets of \(\{1, 2, \dots, 2n + (k - 2)\}\),
+    and two \(n\)-subsets are adjacent if and only if they are disjoint.
+
+    First, we prove that \(G\) is vertex-transitive.
+    Let
+    \begin{equation}
+        A = \{a_1, a_2, \dots, a_n\}
+        \quad \text{ and } \quad
+        B = \{b_1, b_2, \dots, b_n\}
+    \end{equation}
+    be \(n\)-subsets of \(\{1, 2, \dots, 2n + (k - 2)\}\).
+    Denote by 
+    \begin{equation}
+        a_{n+1}, a_{n+2}, \dots, a_{2n + (k - 2)}
+        \quad \text{ and } \quad
+        b_{n+1}, b_{n+2}, \dots, b_{2n + (k - 2)}
+    \end{equation}
+    the elements of \([2n + (k - 2)] \setminus A\) and \([2n + (k - 2)] \setminus B\), respectively.
+    Consider the function \(f \colon [2n + (k - 2)] \to [2n + (k - 2)]\) defined by \(f(a_i) = b_i\) for all \(i \in [2n + (k - 2)]\).
+    Then, \(f\) is a bijection and \(f(A) = B\).
+    Define the function \(\tilde{f} \colon V(G) \to V(G)\) by \(\tilde{f}(X) = f(X)\) for all \(X \in V(G)\).
+    Note that \(f(X) \cap f(Y) = \emptyset\) if and only if \(X \cap Y = \emptyset\),
+    and hence \(\tilde{f}\) is an automorphism of \(G\) that maps \(A\) to \(B\).
+    \textbf{Since \(A\) and \(B\) are arbitrary, \(G\) is vertex-transitive.}
+
+    Second, we prove that \(G\) is triangle-free.
+    Let \(A\), \(B\), and \(C\) be \(n\)-subsets of \(\{1, 2, \dots, 2n + (k - 2)\}\).
+    Since \(3n > 2n + k - 2\), by the pigeonhole principle,
+    two of these sets must have a common element,
+    and hence the triangle \(ABC\) is not present in \(G\).
+    Since \(A\), \(B\), and \(C\) are arbitrary, \(G\) is triangle-free.
+
+    Lastly, \nameref{thm:kneser-conjecture} implies that
+    \begin{equation}
+        \chi\left(K\big(2n + (k-2), n\big)\right) = 2n - 2n + (k - 2) + 2 = k.
+    \end{equation}
+    Therefore, the graph \(G = K\big(2n + (k-2), n\big)\) is a triangle-free vertex-transitive graph with \(\chi(G) \geq k\), as desired.
+\end{proof}
+
+Theorem~\ref{thm:antipodal-open-or-closed} can be proved using \nameref{thm:borsuk-ulam}.
+
+\begin{theorem} \label{thm:antipodal-open-or-closed}
+Let \(A_1, \ldots A_{\ell+1}\) be sets in the \(\ell\)-sphere \(S_{\ell}\) such that \(S_{\ell}=A_1 \cup \ldots \cup A_{\ell+1}\) and each \(A_i\) is either open or closed (i.e. its complement is open). Then some \(A_i\) contains a pair of antipodal points.
+\end{theorem}
+
+\begin{proposition}[Homework 2, Exercise 1] \label{prop:hw2-ex1}
+    Let \(B=\left\{b_1, \ldots, b_{2 k+\ell}\right\}\) be a set of points in \(S_{\ell+1}\) in general position (i.e. every subset \(B^{\prime} \subset B\) with \(\left|B^{\prime}\right|=\ell+2\) is linearly independent).
+    Let \(C_1 \cup \ldots \cup C_{\ell+1}\) be a partition of all \(k\)-subsets of \(B\).
+    Then, \(C_i\) contains a pair of disjoint subsets for some \(i \in \{1, 2, \ldots, \ell+1\}\).
+\end{proposition}
+
+Note that the proof below of Proposition~\ref{prop:hw2-ex1} does not use \nameref{thm:gale}.
+
+\begin{proof}
+    For \(i \in \{1, 2, \dots, \ell + 1\}\), let
+    \begin{equation}
+        A_i = \{
+            a \in S_{\ell + 1}
+            :
+            \text{there exists a \(k\)-subset } S \in C_i
+            \text{ such that } S \subset H(a)
+        \},
+    \end{equation}
+    where \(H(a)\) denotes
+    the open hemisphere of \(S_{\ell + 1}\) centered at \(a\).
+    Note that \(b \in H(a) \iff a \in H(b)\), and hence
+    \begin{equation}
+        A_i = \bigcup_{S \in C_i} \bigcap_{b \in S} H(b),
+    \end{equation}
+    which is a union of finitely many intersections of open sets,
+    and hence \(A_i\) is open.
+
+    Define 
+    \begin{equation}
+        A_{\ell + 2} =
+        S_{\ell + 1} \setminus \left( \bigcup_{i = 1}^{\ell + 1} A_i \right).
+    \end{equation}
+    Since the complement of \(A_{\ell + 2}\) is the union of open sets, 
+    the complement of \(A_{\ell + 2}\) is open,
+    and hence \(A_{\ell + 2}\) is closed.
+
+    Then, we have
+    subsets \(A_1, A_2, \dots, A_{\ell + 2}\)
+    of the \((\ell + 1)\)-sphere \(S_{\ell + 1}\)
+    such that \( S_{\ell + 1} = A_1 \cup A_2 \cup \dots \cup A_{\ell + 2} \),
+    and each \(A_i\) is either open or closed.
+    Therefore, by Theorem~\ref{thm:antipodal-open-or-closed},
+    there exists an \(i \in \{1, 2, \dots, \ell + 2\}\)
+    such that \(A_i\) contains a pair of antipodal points.
+
+    Assume, for the sake of contradiction, that \(i = \ell + 2\).
+    Then, there exists \(a \in S_{\ell + 1}\)
+    such that \(a, -a \in A_{\ell + 2}\).
+    Let \(P(a, -a) \subset \mathbb{R}^{\ell + 2}\) be the perpendicular bisector of the line segment connecting \(a\) and \(-a\),
+    which has dimension \(\ell + 1\).
+    Note that the sets
+    \begin{equation}
+        H(a), \quad H(-a), \quad P(a, -a) \cap S_{\ell + 1}
+    \end{equation}
+    partition the \((\ell + 1)\)-sphere \(S_{\ell + 1}\).
+    Since \(P(a, -a)\) has dimension \(\ell + 1\) and \(B\) is in general position,
+    \(P(a, -a) \cap S_{\ell + 1}\) contains at most \(\ell + 1\) points of \(B\).
+    Therefore, there are at least
+    \begin{equation}
+        (2k + \ell) - (\ell + 1) = 2k - 1
+    \end{equation}
+    points of \(B\) in \(H(a) \cup H(-a)\).
+    By the pigeonhole principle,
+    there are at least \(k\) points of \(B\) contained in one of \(H(a)\) or \(H(-a)\).
+    Let \(S\) be the set of these \(k\) points, and assume without loss of generality that \(S \subset H(a)\).
+    Since \(C_1 \cup C_2 \cup \dots \cup C_{\ell + 1}\) is a partition of all \(k\)-subsets of \(B\),
+    there exists an \(j \in \{1, 2, \dots, \ell + 1\}\) such that \(S \in C_j\).
+    Then, \(S \subset H(a)\) and \(S \in C_j\), and hence \(a \in A_j\),
+    which finally implies that \(a \notin A_{\ell + 2}\),
+    a contradiction.
+    Therefore, \(i \neq \ell + 2\),
+
+    Hence, there exists an \(i \in \{1, 2, \dots, \ell + 1\}\)
+    and \(a \in S_{\ell + 1}\) such that \(a, -a \in A_i\).
+    Since \(a \in A_i\),
+    there exists a \(k\)-subset \(S \in C_i\) such that \(S \subset H(a)\).
+    Since \(-a \in A_i\),
+    there exists a \(k\)-subset \(T \in C_i\) such that \(T \subset H(-a)\).
+    Since \(H(a)\) and \(H(-a)\) are disjoint,
+    \(S\) and \(T\) are disjoint.
+    Therefore, \(C_i\) contains a pair of disjoint subsets, namely \(S\) and \(T\), as desired.
+\end{proof}
+
+
 \section{Edge coloring}
 
 \begin{definition}[Edge Coloring]
@@ -1042,6 +1188,287 @@ We say that a path \(P = v_0e_0v_1e_1v_2\cdots e_{k-1}v_k\) is a \vocab{valid pa
         \chi'(G) \leq \Delta(G) + 1 + \frac{\Delta(G) - 2}{g_0(G) - 1},
     \end{equation}
     a contradiction.
+\end{proof}
+
+\begin{proposition}[Homework 2, Exercise 4] \label{prop:hw2-ex4}
+    Let \(G\) be a multigraph with maximum degree \(\Delta\) and maximum multiplicity \(\mu\).
+    Then, \(G\) has an edge coloring with \(\Delta + \mu\) colors.
+\end{proposition}
+
+\begin{proof}
+    Assume, as an induction hypothesis,
+    that every multigraph \(H\) with \(|E(H)| < |E(G)|\)
+    has an edge coloring with \(\Delta(H) + \mu(H)\) colors.
+    If \(|E(G)| = 0\),
+    then the empty coloring is a valid edge coloring of \(G\)
+    with \(\Delta(G) + \mu(G) = 0\) colors,
+    as desired.
+
+    Assume that \(|E(G)| > 0\).
+    Then, \(\mu(G) \geq 1\).
+    Let \(e_0\) be an edge of \(G\),
+    with endpoints \(v_0\) and \(v_1\).
+    By the induction hypothesis,
+    the graph \(G - e_0\) has an edge coloring
+    with \(\Delta(G - e_0) + \mu(G - e_0)\) colors,
+    and hence it has an edge coloring
+    with \(\Delta(G) + \mu(G)\) colors.
+    Let \(\varphi \colon G - e_0 \to [\Delta(G) + \mu(G)]\)
+    be such a coloring.
+
+    Given \(v \in V(G)\),
+    let \(\overline\varphi(v)\) denote the
+    set of colors that are not assigned to edges incident to \(v\).
+    Note that,
+    for every vertex \(v \in V(G)\),
+    the number of colors assigned to edges incident to \(v\)
+    equals \(\deg_{G - e_0}(v)\),
+    and consequently,
+    \begin{equation} \label{eq:overline-phi-v-mu}
+        \thickmuskip=20mu
+        |\overline\varphi(v)| = \Delta(G) + \mu(G) - \deg_{G - e_0}(v) \geq \mu(G)
+    \end{equation}
+    since \(\deg_{G - e_0}(v) \leq \Delta(G)\).
+    Moreover, since \(\deg_{G - e_0}(v_0) \leq \Delta(G) - 1\)
+    and \(\deg_{G - e_0}(v_1) \leq \Delta(G) - 1\),
+    we have
+    \begin{equation} \label{eq:overline-phi-v0-v1-mu}
+        \thickmuskip=20mu
+        \begin{aligned}
+            |\overline\varphi(v_0)|  \geq \mu(G) + 1 & \quad \text{and} \\
+            |\overline\varphi(v_1)|  \geq \mu(G) + 1 & .
+        \end{aligned}
+    \end{equation}
+
+    Recall that a path \(P = (v_0, e_0, v_1, \dots, e_{k-1}, v_k)\)
+    is a valid path with respect to \(\varphi\) if
+    \begin{enumerate}[itemsep=0pt, topsep=0pt]
+        \item for every \(i \in \{0, \dots, k\}\),
+            \(\overline\varphi(v) \neq \emptyset\), \label{item:valid-path-missing-color}
+        \item for every \(i \in \{1, \dots, k\}\),
+            there exists \(j \in \{0, \dots, i-1\}\)
+            such that \(\varphi(e_i) \in \overline\varphi(v_j)\). \label{item:valid-path-color-misses-before}
+    \end{enumerate}
+
+    Note that condition~\ref{item:valid-path-missing-color} is satisfied for any path \(P\),
+    since \(|\overline\varphi(v)| \geq \mu(G) \geq 1\).
+    Therefore, in our context,
+    a path \(P = (v_0, e_0, v_1, \dots, e_{k-1}, v_k)\) is a valid path
+    if and only if
+    condition~\ref{item:valid-path-color-misses-before} is satisfied.
+
+    Let \(P = (v_0, e_0, v_1, \dots, e_{k-1}, v_k)\) be
+    a longest valid path with respect to \(\varphi\).
+
+    Assume,
+    for the sake of contradiction, that
+    \(\overline\varphi(v_0)\),
+    \(\overline\varphi(v_1)\),
+    \(\dots\),
+    \(\overline\varphi(v_k)\)
+    are pairwise disjoint.
+    Then, using Equations~\eqref{eq:overline-phi-v-mu} and~\eqref{eq:overline-phi-v0-v1-mu},
+    \begin{equation}
+        \thickmuskip=20mu
+        \left| \bigcup_{i=0}^{k-1} \overline\varphi(v_i) \right|
+        = \sum_{i=0}^{k-1} |\overline\varphi(v_i)|
+        \geq k\mu + 2.
+    \end{equation}
+    For each color \(\alpha \in \bigcup_{i=0}^{k-1} \overline\varphi(v_i)\),
+    by the disjuction property, \(\alpha \notin \varphi(v_k)\),
+    and consequently
+    there exists an edge \(e^{\alpha}\) incident to \(v_k\)
+    such that \(\varphi(e^{\alpha}) = \alpha\).
+    Let \(v^{\alpha}\) be the other endpoint of \(e^{\alpha}\).
+    Note that \(P^{\alpha} = (v_0, e_0, v_1, \dots, e_{k-1}, v_k, e^{\alpha}, v^{\alpha})\)
+    atisfies condition~\ref{item:valid-path-color-misses-before},
+    therefore, by maximality of \(P\),
+    \(P^{\alpha}\) is not a path,
+    and hence \(v^{\alpha} \in \{v_0, v_1, \dots, v_k\}\).
+
+    Note that \(e^{\alpha} \neq e^{\beta}\) for distinct \(\alpha\) and \(\beta\), since they are assigned distinct colors.
+    Therefore, the set
+    \begin{equation}
+        \left\{ e^{\alpha} : \alpha \in \bigcup_{i=0}^{k-1} \overline\varphi(v_i) \right\}
+    \end{equation}
+    has at least \(k\mu(G) + 2\) edges incident to \(v_k\),
+    whose other endpoints are in \(\{v_0, v_1, \dots, v_k\}\).
+    By the pigeonhole principle,
+    there exists a vertex \(v_i\) such that
+    at least \(\mu(G) + 1\) of these edges are incident to \(v_i\) and \(v_k\).
+    This contradicts the fact that \(\mu(G)\) is the maximum multiplicity of \(G\).
+
+    Therefore,
+    \(\overline\varphi(v_0)\),
+    \(\overline\varphi(v_1)\),
+    \(\dots\),
+    \(\overline\varphi(v_k)\)
+    are not all pairwise disjoint, that is,
+    some color is missing at some pair of vertices \(v_i\) and \(v_j\), \(i \neq j\).
+
+    Since \(P\) is a valid path with respect to \(\varphi \colon G-e_0 \to [\Delta(G) + \mu(G)]\),
+    such that some color is missing at two distinct vertices in \(P\),
+    there exists an edge coloring of \(G\) with \(\Delta(G) + \mu(G)\) colors,
+    as desired.
+\end{proof}
+
+\begin{proposition}[Homework 2, Exercise 5]
+    Let \(G\) be a multigraph with maximum degree \(\Delta\) and maximum multiplicity \(\mu \geq 2\).
+    If \(\chi^{\prime}(G) > \Delta + \mu - 1\),
+    Then \(G\) contains a triangle with at least \(2\mu\) edges induced by its vertex set.
+\end{proposition}
+
+We prove the contrapositive of the statement, as stated in Lemma~\ref{lem:triangle-2mu-contrapositive}.
+
+\begin{lemma} \label{lem:triangle-2mu-contrapositive}
+    Let \(\mu \geq 2\) and \(\Delta \geq 0\).
+    Let \(G\) be a multigraph with \(\mu(G) \leq \mu\) and \(\Delta(G) \leq \Delta\).
+    Assume that every triangle in \(G\) has at most \(2\mu - 1\) edges induced by its vertex set.
+    Then, \(\chi^{\prime}(G) \leq \Delta + \mu - 1\).
+\end{lemma}
+
+\begin{proof}
+    Let \(G\) be a multigraph.
+    Assume, as an induction hypothesis,
+    that every multigraph \(H\) with \(|E(H)| < |E(G)|\),
+    \(\mu(H) \leq \mu\) and \(\Delta(H) \leq \Delta\)
+    such that every triangle in \(H\) has at most \(2\mu - 1\) edges induced by its vertex set
+    has an edge coloring with \(\Delta(H) + \mu(H) - 1\) colors.
+    If \(|E(G)| = 0\),
+    then the empty coloring is a valid edge coloring of \(G\)
+    with \(\Delta + \mu - 1\) colors,
+    as desired.
+
+    Assume that \(|E(G)| > 0\).
+    Let \(e_0\) be an edge of \(G\),
+    with endpoints \(v_0\) and \(v_1\).
+    By the induction hypothesis,
+    since \(G - e_0\) has fewer edges than \(G\),
+    \(\mu(G - e_0) \leq \mu\) and \(\Delta(G - e_0) \leq \Delta\),
+    and every triangle in \(G - e_0\) has at most \(2\mu - 1\) edges induced by its vertex set,
+    the graph \(G - e_0\) has an edge coloring
+    with \(\Delta + \mu - 1\) colors.
+    Let \(\varphi \colon G - e_0 \to [\Delta + \mu - 1]\)
+    be such a coloring.
+
+    Given \(v \in V(G)\),
+    let \(\overline\varphi(v)\) denote the
+    set of colors that are not assigned to edges incident to \(v\).
+    Note that,
+    for every vertex \(v \in V(G)\),
+    the number of colors assigned to edges incident to \(v\)
+    equals \(\deg_{G - e_0}(v)\),
+    and consequently,
+    \begin{equation} \label{eq:overline-phi-v-mu-again}
+        \thickmuskip=20mu
+        |\overline\varphi(v)| = \Delta + \mu - 1 - \deg_{G - e_0}(v) \geq \mu - 1
+    \end{equation}
+    since \(\deg_{G - e_0}(v) \leq \Delta\).
+    Moreover, since \(\deg_{G - e_0}(v_0) \leq \Delta - 1\)
+    and \(\deg_{G - e_0}(v_1) \leq \Delta - 1\),
+    we have
+    \begin{equation} \label{eq:overline-phi-v0-v1-mu-again}
+        \thickmuskip=20mu
+        |\overline\varphi(v_0)|  \geq \mu(G)
+        \quad \text{and} \quad
+        |\overline\varphi(v_1)|  \geq \mu(G).
+    \end{equation}
+
+    Recall that a path \(P = (v_0, e_0, v_1, \dots, e_{k-1}, v_k)\)
+    is a valid path with respect to \(\varphi\) if
+    \begin{enumerate}[itemsep=0pt, topsep=0pt]
+        \item for every \(i \in \{0, \dots, k\}\),
+            \(\overline\varphi(v) \neq \emptyset\), \label{item:valid-path-missing-color-again}
+        \item for every \(i \in \{1, \dots, k\}\),
+            there exists \(j \in \{0, \dots, i-1\}\)
+            such that \(\varphi(e_i) \in \overline\varphi(v_j)\). \label{item:valid-path-color-misses-before-again}
+    \end{enumerate}
+
+    Note that condition~\ref{item:valid-path-missing-color} is satisfied for any path \(P\),
+    since \(|\overline\varphi(v)| \geq \mu - 1 \geq 1\).
+    Therefore, in our context,
+    a path \(P = (v_0, e_0, v_1, \dots, e_{k-1}, v_k)\) is a valid path
+    if and only if
+    condition~\ref{item:valid-path-color-misses-before} is satisfied.
+
+    Let \(P = (v_0, e_0, v_1, \dots, e_{k-1}, v_k)\) be
+    a longest valid path with respect to \(\varphi\).
+
+    Assume,
+    for the sake of contradiction, that
+    \(\overline\varphi(v_0)\),
+    \(\overline\varphi(v_1)\),
+    \(\dots\),
+    \(\overline\varphi(v_k)\)
+    are pairwise disjoint.
+    Then, using Equations~\eqref{eq:overline-phi-v-mu-again} and~\eqref{eq:overline-phi-v0-v1-mu-again},
+    \begin{equation}
+        \thickmuskip=20mu
+        \left| \bigcup_{i=0}^{k-1} \overline\varphi(v_i) \right|
+        = \sum_{i=0}^{k-1} |\overline\varphi(v_i)|
+        \geq k\mu - k + 2.
+    \end{equation}
+    For each color \(\alpha \in \bigcup_{i=0}^{k-1} \overline\varphi(v_i)\),
+    by the disjuction property, \(\alpha \notin \varphi(v_k)\),
+    and consequently
+    there exists an edge \(e^{\alpha}\) incident to \(v_k\)
+    such that \(\varphi(e^{\alpha}) = \alpha\).
+    Let \(v^{\alpha}\) be the other endpoint of \(e^{\alpha}\).
+    Note that \(P^{\alpha} = (v_0, e_0, v_1, \dots, e_{k-1}, v_k, e^{\alpha}, v^{\alpha})\)
+    atisfies condition~\ref{item:valid-path-color-misses-before},
+    therefore, by maximality of \(P\),
+    \(P^{\alpha}\) is not a path,
+    and hence \(v^{\alpha} \in \{v_0, v_1, \dots, v_k\}\).
+
+    Given two vertices \(u, w \in V(G)\),
+    let \(\mu_{uw}\) denote the number of edges incident to \(u\) and \(w\).
+    We know that \(\mu_{uw} \leq \mu\),
+
+    Note that \(e^{\alpha} \neq e^{\beta}\) for distinct \(\alpha\) and \(\beta\), since they are assigned distinct colors.
+    Therefore, there are at least \(k\mu - k + 2\) edges incident to \(v_k\) and to some other vertex in \(\{v_0, v_1, \dots, v_{k-1}\}\),
+    that is,
+    \( \mu_{v_0v_k} + \mu_{v_1v_k} + \dots + \mu_{v_{k-1}v_k} \geq k\mu - k + 2\),
+    or equivalently,
+    \begin{equation}
+        \thickmuskip=20mu
+        \sum_{i=0}^{k-1}
+        \left( \mu - \mu_{v_iv_k} \right) \leq k - 2,
+    \end{equation}
+    and consequently,
+    \begin{equation}
+        \thickmuskip=20mu
+        \sum\nolimits_{j=0}^{\left\lfloor\frac{k-2}{2}\right\rfloor}
+        \left( 2\mu - \mu_{v_{2j}v_k} - \mu_{v_{2j+1}v_k} \right) \leq k - 2 < 2 \cdot \left\lfloor\frac{k}{2}\right\rfloor.
+    \end{equation}
+    Since there are \(\left\lfloor\frac{k}{2}\right\rfloor\) summands, whose sum is strictly less than \(2 \cdot \left\lfloor\frac{k}{2}\right\rfloor\),
+    there exists an index \(j \in \{0, 1, \dots, \left\lfloor\frac{k-2}{2}\right\rfloor\}\) such that the \(j\)\textsuperscript{th} summand is strictly less than \(2\).
+    Therefore,
+    \( 2\mu - \mu_{v_{2j}v_k} - \mu_{v_{2j+1}v_k} \leq 1 \),
+    and consequently
+    \begin{equation}
+        \mu_{v_{2j}v_k} + \mu_{v_{2j+1}v_k} + 1 \geq 2\mu.
+    \end{equation}
+    Since \(\mu_{v_{2j}v_k} \leq \mu\) and \(\mu_{v_{2j+1}v_k} \leq \mu\),
+    it follows that \(\mu_{v_{2j}v_k} \geq \mu - 1 > 1\) and \(\mu_{v_{2j+1}v_k} \geq \mu - 1 > 1\),
+    and hence there is an edge connecting \(v_{2j}\) and \(v_k\) and an edge connecting \(v_{2j+1}\) and \(v_k\),
+    as well as an edge \(e_{2j}\) connecting \(v_{2j}\) and \(v_{2j+1}\).
+    Hence, there exists a triangle on the vertices \(\{v_{2j}, v_{2j+1}, v_k\}\).
+    Moreover, such triangle has at least
+    \( \mu_{v_{2j}v_k} + \mu_{v_{2j+1}v_k} + 1 \geq 2\mu \) edges,
+    a contradiction.
+
+    Therefore,
+    \(\overline\varphi(v_0)\),
+    \(\overline\varphi(v_1)\),
+    \(\dots\),
+    \(\overline\varphi(v_k)\)
+    are not all pairwise disjoint, that is,
+    some color is missing at some pair of vertices \(v_i\) and \(v_j\), \(i \neq j\).
+
+    Since \(P\) is a valid path with respect to \(\varphi \colon G-e_0 \to [\Delta(G) + \mu(G)]\),
+    such that some color is missing at two distinct vertices in \(P\),
+    there exists an edge coloring of \(G\) with \(\Delta(G) + \mu(G)\) colors,
+    as desired.
 \end{proof}
 
 \section{List coloring}
